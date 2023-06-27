@@ -1,13 +1,20 @@
 package com.morpheusdata.permissions
 
-import com.morpheus.core.Plugin;
+import com.morpheusdata.model.Permission
+import com.morpheusdata.core.Plugin
 
 class PermissionsPlugin extends Plugin {
+        @Override
+        String getCode() {
+                return 'permissions-plugin'
+        }
 
         @Override
         void initialize() {
                 this.setName("Permissions Plugin");
-                CustomTabProvider tabProvider = new CustomTabProvider(this, morpheus);
-                this.registerProvider(tabProvider);
+                this.setPermissions([Permission.build('Uthman Custom Permission','uthman-custom-permission', [Permission.AccessType.none, Permission.AccessType.full])])
         }
+
+        @Override
+        void onDestroy() {}
 }
