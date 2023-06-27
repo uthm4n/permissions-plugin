@@ -1,0 +1,58 @@
+plugins {
+    id "com.bertramlabs.asset-pipeline" version "4.0.0"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+group = 'com.example'
+version = '1.0.0'
+
+sourceCompatibility = '1.11'
+targetCompatibility = '1.11'
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    provided
+}
+
+dependencies {
+    provided 'com.morpheusdata:morpheus-plugin-api:0.12.5' //use 0.13.4 for 5.5.x
+    provided 'org.codehaus.groovy:groovy-all:3.0.9'
+
+    /*
+     When using custom libraries, use the gradle `implementation` directive
+     instead of `provided`.
+     This will allow shadowJar to package the library into the resulting plugin and keep it
+     isolated within the same classloader.
+     */
+}
+
+
+jar {
+	manifest {
+		attributes(
+				'Plugin-Class': 'com.morpheusdata.permissions.PermissionsPlugin',
+				'Plugin-Version': 1.0,
+				'Morpheus-Name': 'Permissions Plugin',
+				'Morpheus-Organization': 'morpheus',
+				'Morpheus-Code': 'permissions-plugin',
+				'Morpheus-Description': 'Custom plugin that adds a permission to Administration > Roles',
+				'Morpheus-Logo': 'assets/goku.svg',
+				'Morpheus-Logo-Dark': 'assets/goku.svg',
+				'Morpheus-Color': '#ffffff',
+				'Morpheus-Labels': 'Plugin, Build',
+				'Morpheus-Repo': 'https://github.com/gomorpheus/morpheus-plugin-core',
+				'Morpheus-Min-Appliance-Version': "5.4.12"
+		)
+	}
+}
+
+tasks.assemble.dependsOn tasks.shadowJar
