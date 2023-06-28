@@ -4,6 +4,9 @@ A working implementation of how to add a custom permission in [Morpheus](https:/
 
 Useful as a template if you intend to add custom permissions in your plugin code! 
 
+**Build command:**
+`./gradlew shadowJar`
+
 
 **Note:**
 - I have only implemented **full** or **none** permissions but you can extend this to **read** too (by implementing [Permission.AccessType.read](https://developer.morpheusdata.com/api/com/morpheusdata/model/Permission.AccessType.html))
