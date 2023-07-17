@@ -14,6 +14,10 @@ class PermissionsPlugin extends Plugin {
                 this.setName("Permissions Plugin");
                 this.setPermissions([Permission.build('Uthman Custom Permission','uthman-custom-permission', [Permission.AccessType.none, Permission.AccessType.full])])
         }
+///       public List<Permission> getPermissions() {
+///		Permission permission = new Permission('Uthman Custom Permission', 'uthman-custom-permission', [Permission.AccessType.none, Permission.AccessType.full])
+///		return [permission];
+///	}
 
         @Override
         void onDestroy() {}
